@@ -80,6 +80,12 @@ function render() {
 
 render()
 
+document.addEventListener('keydown', function (e) {
+	if (e.key === 'Enter') {
+		createBtn.onclick();
+	}
+}); //сделала чт бы с помощью Enter создавались новые заметки
+
 createBtn.onclick = function () {
 	if (inputElement.value.length === 0) {
 		return  
@@ -97,7 +103,7 @@ createBtn.onclick = function () {
   inputElement.value = '' 
 }
 
-listElement.onclick = function (event) {
+listElement.onclick = function listsElement(event) {
 	if (event.target.dataset.index) {
 		const index = parseInt(event.target.dataset.index)
 									//Number(event.target.dataset.index) 
@@ -107,8 +113,8 @@ listElement.onclick = function (event) {
 			notes[index].completed = !notes[index].completed
 		} else if (type === 'remove') {
 			console.log('remove', index);
-		}
-
+			// document.querySelector('ul li').style.display = 'none'; - ПЕРЕДЕЛАТЬ
+		}	
 		render()																					 // привели переменную 
 																											 //в тип данных number с помощью parseInt, или же можно с помощью Number()
 	} //если что то будет написано event.target.dataset.index, то код выполниться
@@ -127,8 +133,3 @@ function getNoteTemplate(note, index) {
 		</li>
   `
 }
-
-
-
-
-
